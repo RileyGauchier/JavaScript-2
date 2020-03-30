@@ -16,7 +16,8 @@ class Server {
         this.api = Express();
         this.api.use( Express.json() )
                 .use( Express.urlencoded({ extended: false }))
-                .use( Express.static( Path.join( __dirname, '.')));
+                .use( Express.static( Path.join( __dirname, '.')))
+                .use( '/api/', LevelAPI);
 
 
         this.api.get('/', ( request, response ) => {
@@ -35,7 +36,57 @@ class Server {
             let JSONString = JSON.stringify( result );
             response.send( JSONString )
         });
+        /*
+        from the client...
+        let params = {
+          userid: "pg18riley"
+          name: "level-1",
+          type: "level",
+          payload: myLevel.serialize();
+        }
+        $.post('/api/get_level_list/${params.userid}', params)
+          .then( response => {})
+          .cathc( error => {})
+        */
+        this.api.post('/api/get_level_list/:userid?', ( request, response) =>{
 
+            let theUser = request.params.userid;
+            let params = {
+              ...request.params,
+              ...request.query,
+              ...request.body,
+            }
+
+            /*
+            request.params = {
+            userid: "pg18riley"
+          }
+          request.query = {
+
+        }
+        request.body = {
+        userid: "pg18riley",
+        name: "level-1",
+        type: "level",
+        payload: "{ some JSON here}"
+        ==> after spread operators...
+
+        let params = {
+        userid: "pg18riley",
+        name: "level-1",
+        type: "level",
+        payload: " some JSON here"
+      }
+      }
+            */
+            let result = {
+              payload: {
+                fileNameList: ["actual_filename.json"]
+              },
+              error: 0
+            }
+            repsonse.send( JSONString)
+        })
         this.api.post('/api/:action', ( request, response ) => {
             // handle edges from form
             let result = this.handleActionQuery( request.params.action, request.query, request.body );
