@@ -9,9 +9,16 @@ const Router = Express.Router();
 import Result from './Result'
 
 Router.post('/load/:userid?', ( req, res) => {
-  let result = new Result();
+  let params = {...req.params, ...req.query, ...req.body}
+  let result = new Result( 201, params.userid);
   response.send( result.serialize())
 
 });
+
+Router.post('/save/:userid?', (req, res) =>{
+  let params = {...req.params, ...req.query, ...req.body}
+  let result = new Result( 201, params.userid);
+  res.send
+})
 
 export default Router;

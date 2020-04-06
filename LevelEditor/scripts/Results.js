@@ -13,6 +13,6 @@ export default class  Result {
   }
 
   serialize(){
-    return JSON.stringify( this.__private__ );
+    return JSON.stringify( this.__private__ .payload);
   }
 }
