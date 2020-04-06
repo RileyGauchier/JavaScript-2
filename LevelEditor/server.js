@@ -36,18 +36,7 @@ class Server {
             let JSONString = JSON.stringify( result );
             response.send( JSONString )
         });
-        /*
-        from the client...
-        let params = {
-          userid: "pg18riley"
-          name: "level-1",
-          type: "level",
-          payload: myLevel.serialize();
-        }
-        $.post('/api/get_level_list/${params.userid}', params)
-          .then( response => {})
-          .cathc( error => {})
-        */
+
         this.api.post('/api/get_level_list/:userid?', ( request, response) =>{
 
             let theUser = request.params.userid;
@@ -57,28 +46,6 @@ class Server {
               ...request.body,
             }
 
-            /*
-            request.params = {
-            userid: "pg18riley"
-          }
-          request.query = {
-
-        }
-        request.body = {
-        userid: "pg18riley",
-        name: "level-1",
-        type: "level",
-        payload: "{ some JSON here}"
-        ==> after spread operators...
-
-        let params = {
-        userid: "pg18riley",
-        name: "level-1",
-        type: "level",
-        payload: " some JSON here"
-      }
-      }
-            */
             let result = {
               payload: {
                 fileNameList: ["actual_filename.json"]
