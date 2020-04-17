@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Scott Henshaw
+// Copyright (C) 2020 Riley Gauchier
 'use strict';
 
 // This controlls the User Interface
@@ -6,6 +6,29 @@ export default class App {
 
     constructor() {
 
+        $.post('/api/get_level_list', { userid: "levels" })
+        .then( response => {
+
+            let data = JSON.parse(response);
+            console.log(data);
+            if (data.error > 0) {
+
+            }
+            else {
+
+            }
+        })
+        .fail( error => {
+
+        })
+
+        $.post('/api/save', {userid: "levels", name: "level_01", type: "level", payload: "string"})
+        .then( response => {
+            console.log(JSON.parse(response));
+        })
+        .fail( error =>{
+            console.log("Hola")
+        })
         // Initialize level data
 
         // fetch the list of library things

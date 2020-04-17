@@ -4,73 +4,24 @@
 import Express from 'express'
 import Path from 'path'
 import HTTP from 'http'
-import FileSystem from 'fs'
-
+import LevelAPI from './LevelAPI'
 
 const PORT = 3000;
 
 class Server {
 
     constructor() {
-
         this.api = Express();
         this.api.use( Express.json() )
                 .use( Express.urlencoded({ extended: false }))
                 .use( Express.static( Path.join( __dirname, '.')))
-                .use( '/api/', LevelAPI);
+                .use( '/api', LevelAPI);
 
 
         this.api.get('/', ( request, response ) => {
             response.render('index',{ title:'Greatest Form Demo Ever!'})
         });
-
-        this.api.post('/api', ( request, response ) => {
-            // handle edges from form
-
-            let params = request.params; // data attached in the url /api/:name/:id
-            let query = request.query;   // data attached as a PHP param String
-            let data = request.body;     // data attached as JSON data
-
-
-            let result = this.handleActionQuery( request.query.action, request.query, request.body );
-            let JSONString = JSON.stringify( result );
-            response.send( JSONString )
-        });
-
-        this.api.post('/api/get_level_list/:userid?', ( request, response) =>{
-
-            let theUser = request.params.userid;
-            let params = {
-              ...request.params,
-              ...request.query,
-              ...request.body,
-            }
-
-            let result = {
-              payload: {
-                fileNameList: ["actual_filename.json"]
-              },
-              error: 0
-            }
-            repsonse.send( JSONString)
-        })
-        this.api.post('/api/:action', ( request, response ) => {
-            // handle edges from form
-            let result = this.handleActionQuery( request.params.action, request.query, request.body );
-            let JSONString = JSON.stringify( result );
-            response.send( JSONString )
-        });
-
-        this.api.post('/api/save', ( request, response ) => {
-            // handle edges from form
-            let result = this.handleActionQuery('save', request.query, request.body );
-
-            // Lets get some data to the client
-            // TODO: something with the form we got sent, like save the content as a file
-            let JSONString = JSON.stringify( result );
-            response.send( JSONString )
-        });
-
+                
         this.run()
     }
 
