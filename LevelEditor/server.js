@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Scott Henshaw, All Rights Reserved
+// Copyright (C) 2020 Riley Gauchier, All Rights Reserved
 'use strict';
 
 import Express from 'express'

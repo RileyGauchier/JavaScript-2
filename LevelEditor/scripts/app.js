@@ -11,12 +11,6 @@ export default class App {
 
             let data = JSON.parse(response);
             console.log(data);
-            if (data.error > 0) {
-
-            }
-            else {
-
-            }
         })
         .fail( error => {
 
