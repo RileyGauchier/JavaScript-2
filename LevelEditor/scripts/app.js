@@ -16,13 +16,6 @@ export default class App {
 
         })
 
-        $.post('/api/save', {userid: "levels", name: "level_01", type: "level", payload: "string"})
-        .then( response => {
-            console.log(JSON.parse(response));
-        })
-        .fail( error =>{
-            console.log("Hola")
-        })
         // Initialize level data
 
         // fetch the list of library things

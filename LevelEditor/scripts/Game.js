@@ -1,35 +1,43 @@
 // Copyright (C) Riley Gauchier, All Rights Reserved
 'user strict';
 import WorldController from './WorldController'
+import Level from "./level";
 export default class  Game {
   constructor() {
+    this.lastUpdate = 0;
     this.world = new WorldController();
     this.entityList = []; // a list of GameObjects
+    this.currentLevel = new Level();
+    this.currentLevel.load()
+    .then( levelData => {
 
-    //load a level
+        this.currentLevel.parse( levelData );
+        this.run();
+    });
     //update world viewport
     //update the entityList
   }
 
-  update(deltaTime){
-    //this is where the physics runs
-    this.world.update();
-    for(let entity of this.entityList){
-      entity.update();
-    }
-  }
+  update( deltaTime ) {
+        
+    this.world.update( deltaTime );
+}
 
-  render ( deltaTime = 0){
-    //this is where we change all the stuff in the DOM
-    this.world.render();
-    for(let entity of this.entityList){
-      entity.render();
-    }
-  }
-  run( deltaTime = 0){
+render( deltaTime ) {
+
+    this.world.render( deltaTime );
+    this.entityList.forEach( entity => {
+        entity.render( deltaTime );
+    });
+}
+
+  run( timestep = 0 ) {
+
+    let deltaTime = timestep - this.lastUpdate;
+
     this.update( deltaTime );
     this.render( deltaTime );
 
-    window.requestAnimationFrame( ( => { this.run()}))
-  }
+    window.requestAnimationFrame( timestep => this.run( timestep / 100 ));
+}
 }

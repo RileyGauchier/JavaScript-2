@@ -18,12 +18,6 @@ Router.post('/load/:userid?', ( req, res) => {
 
 });
 
-Router.post('/save/:userid?', (req, res) =>{
-  let params = {...req.params, ...req.query, ...req.body}
-  let result = new Result( 201, params.userid);
-  res.send( result.serialize())
-})
-
 // this.api.post('/api', ( request, response ) => {
 //   // handle edges from form
 
