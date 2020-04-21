@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Scott Henshaw
+// Copyright (C) 2020 Riley Gauchier
 'use strict';
 
 import App from './app.js';

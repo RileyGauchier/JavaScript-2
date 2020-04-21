@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Scott Henshae
+// Copyright (C) 2020 Riley Gauchier
 'use strict';
 
 

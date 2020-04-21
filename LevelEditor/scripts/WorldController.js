@@ -1,8 +1,7 @@
 // Copyright (C) Riley Gauchier, All Rights Reserved
 'user strict';
 
-import Physics from './lib/Physics
-'
+import Physics from './lib/Physics'
 export default class  WorldController {
   constructor() {
         let gravity = new Physics.Vec2( 0, Physics.GRAVITY);
